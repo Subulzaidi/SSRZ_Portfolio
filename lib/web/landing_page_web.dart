@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import 'package:flutter/widgets.dart';
 
 import 'package:subul_raza_zaidi/components.dart';
 
@@ -116,7 +114,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset("assets/Web.jpg", height: heightDevice / 1.7),
+                  Image.asset("assets/Web.jpg", height: widthDevice / 1.9),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -213,86 +211,30 @@ class _LandingPageWebState extends State<LandingPageWeb> {
             Container(
               height: heightDevice / 1.73,
               child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SansBold("What I do?", 40.0),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Card(
-                            elevation: 30.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(color: Colors.tealAccent)),
-                            shadowColor: Colors.tealAccent,
-                            child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        "assets/webL.png",
-                                        height: 200.0,
-                                        width: 200.0,
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      SansBold("Web Development", 15.0)
-                                    ])),
-                          ),
-                          Card(
-                            elevation: 30.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(color: Colors.tealAccent)),
-                            shadowColor: Colors.tealAccent,
-                            child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        "assets/app.png",
-                                        height: 200.0,
-                                        width: 200.0,
-                                        fit: BoxFit.contain,
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      SansBold("App Development", 15.0)
-                                    ])),
-                          ),
-                          Card(
-                            elevation: 30.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(color: Colors.tealAccent)),
-                            shadowColor: Colors.tealAccent,
-                            child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        "assets/firebase.png",
-                                        height: 200.0,
-                                        width: 200.0,
-                                      ),
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      SansBold("Back-end Development", 15.0)
-                                    ])),
-                          )
-                        ])
-                  ]),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SansBold("What I do?", 40.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      AnimatedCardWeb(
+                          imagePath: "assets/webL.png",
+                          text: "Web development"),
+                      AnimatedCardWeb(
+                          fit: BoxFit.contain,
+                          imagePath: "assets/app.png",
+                          reverse: true,
+                          text: "App development"),
+                      AnimatedCardWeb(
+                          imagePath: "assets/firebase.png",
+                          text: "Back-end development"),
+                    ],
+                  ),
+                ],
+              ),
             ),
+
             //Fourth Section
             Container(
                 height: heightDevice,
