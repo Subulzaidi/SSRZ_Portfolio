@@ -1,6 +1,8 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import "package:flutter/material.dart";
-
+import 'package:flutter_svg/svg.dart';
 import 'package:subul_raza_zaidi/components.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LandingPageWeb extends StatefulWidget {
   const LandingPageWeb({super.key});
@@ -10,29 +12,82 @@ class LandingPageWeb extends StatefulWidget {
 }
 
 class _LandingPageWebState extends State<LandingPageWeb> {
+  UrlLauncher(String imgPath, String url) {
+    return IconButton(
+      icon: SvgPicture.asset(imgPath, color: Colors.white, width: 35.0),
+      onPressed: () async {
+        await launchUrl(Uri.parse(url));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var heightDevice = MediaQuery.of(context).size.height;
     var widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
-        drawer: Drawer(),
-        backgroundColor: Colors.white,
+        drawer: Drawer(
+          backgroundColor: const Color.fromARGB(255, 34, 34, 34),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                  radius: 72,
+                  backgroundColor: Color.fromARGB(255, 4, 77, 78),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundColor: Colors.white,
+                    backgroundImage: AssetImage("assets/SSRZ-cropped.png"),
+                  )),
+              SizedBox(height: 15.0),
+              SansBold("Subul Raza Zaidi", 30.0),
+              SizedBox(height: 15.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  UrlLauncher("assets/instagram.svg",
+                      "https://www.instagram.com/_.subullll._/"),
+                  UrlLauncher(
+                      "assets/github.svg", "https://github.com/Subulzaidi"),
+                  UrlLauncher("assets/linkedIn.svg",
+                      "https://www.linkedin.com/in/subul-raza-zaidi/")
+                ],
+              )
+            ],
+          ),
+        ),
+        backgroundColor: const Color.fromARGB(255, 34, 34, 34),
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           elevation: 0.0,
-          iconTheme: IconThemeData(size: 25.0, color: Colors.black),
+          iconTheme: IconThemeData(size: 25.0, color: Colors.white),
           title: Row(
             children: [
               Spacer(flex: 3),
-              TabsWeb("Home"),
+              TabsWeb(
+                title: "Home",
+                route: "/",
+              ),
               Spacer(),
-              TabsWeb("Works"),
+              TabsWeb(
+                title: "Works",
+                route: "/work",
+              ),
               Spacer(),
-              TabsWeb("Blog"),
+              TabsWeb(
+                title: "Blog",
+                route: "/blog",
+              ),
               Spacer(),
-              TabsWeb("About"),
+              TabsWeb(
+                title: "About",
+                route: "/about",
+              ),
               Spacer(),
-              TabsWeb("Contact"),
+              TabsWeb(
+                title: "Contact",
+                route: "/contact",
+              ),
               Spacer(flex: 1),
             ],
           ),
@@ -51,7 +106,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                       children: [
                         Container(
                             decoration: BoxDecoration(
-                                color: Colors.tealAccent,
+                                color: Color.fromARGB(255, 4, 77, 78),
                                 borderRadius: BorderRadius.only(
                                     topLeft: Radius.circular(20.0),
                                     topRight: Radius.circular(20.0),
@@ -61,11 +116,28 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                             child: SansBold("Hello, I'm", 15)),
                         SizedBox(height: 15.0),
                         SansBold("Subul Raza Zaidi", 55.0),
-                        Sans("Flutter developer", 30.0),
+                        AnimatedTextKit(
+                          animatedTexts: [
+                            TyperAnimatedText(
+                              "Flutter developer",
+                              textStyle: TextStyle(
+                                fontSize: 30.0,
+                                color: Color.fromARGB(255, 11, 132, 134),
+                                fontWeight: FontWeight.bold,
+                              ),
+                              speed: Duration(milliseconds: 200),
+                            ),
+                          ],
+                          totalRepeatCount: 1,
+                          pause: Duration(milliseconds: 1000),
+                          displayFullTextOnTap: true,
+                          stopPauseOnTap: true,
+                        ),
+                        SizedBox(height: 50.0),
                         SizedBox(height: 15.0),
                         Row(
                           children: [
-                            Icon(Icons.email),
+                            Icon(Icons.email, color: Colors.white),
                             SizedBox(width: 20.0),
                             Sans("subul9010@gmail.com", 15.0),
                           ],
@@ -75,7 +147,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.call),
+                            Icon(Icons.call, color: Colors.white),
                             SizedBox(width: 20.0),
                             Sans("+92 3132221898", 15.0),
                           ],
@@ -85,7 +157,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                         ),
                         Row(
                           children: [
-                            Icon(Icons.location_pin),
+                            Icon(Icons.location_pin, color: Colors.white),
                             SizedBox(width: 20.0),
                             Sans("Gulshan Iqbal Block 1 A-138", 15.0),
                           ],
@@ -94,7 +166,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                     ),
                     CircleAvatar(
                         radius: 147.0,
-                        backgroundColor: Colors.tealAccent,
+                        backgroundColor: Color.fromARGB(255, 4, 77, 78),
                         child: CircleAvatar(
                           radius: 143.0,
                           backgroundColor: Colors.black,
@@ -114,7 +186,10 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset("assets/Web.jpg", height: widthDevice / 1.9),
+                  Image.asset(
+                    "assets/web.png",
+                    height: widthDevice / 1.9,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +211,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.tealAccent,
+                                  color: Color.fromARGB(255, 4, 77, 78),
                                   style: BorderStyle.solid,
                                   width: 2.0,
                                 ),
@@ -150,7 +225,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.tealAccent,
+                                  color: Color.fromARGB(255, 4, 77, 78),
                                   style: BorderStyle.solid,
                                   width: 2.0,
                                 ),
@@ -164,7 +239,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.tealAccent,
+                                  color: Color.fromARGB(255, 4, 77, 78),
                                   style: BorderStyle.solid,
                                   width: 2.0,
                                 ),
@@ -178,7 +253,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.tealAccent,
+                                  color: Color.fromARGB(255, 4, 77, 78),
                                   style: BorderStyle.solid,
                                   width: 2.0,
                                 ),
@@ -192,7 +267,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                           Container(
                             decoration: BoxDecoration(
                                 border: Border.all(
-                                  color: Colors.tealAccent,
+                                  color: Color.fromARGB(255, 4, 77, 78),
                                   style: BorderStyle.solid,
                                   width: 2.0,
                                 ),
@@ -218,15 +293,15 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      AnimatedCardWeb(
+                      AnimatedCard(
                           imagePath: "assets/webL.png",
                           text: "Web development"),
-                      AnimatedCardWeb(
+                      AnimatedCard(
                           fit: BoxFit.contain,
                           imagePath: "assets/app.png",
                           reverse: true,
                           text: "App development"),
-                      AnimatedCardWeb(
+                      AnimatedCard(
                           imagePath: "assets/firebase.png",
                           text: "Back-end development"),
                     ],
@@ -234,7 +309,6 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                 ],
               ),
             ),
-
             //Fourth Section
             Container(
                 height: heightDevice,
@@ -248,8 +322,8 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                             Column(
                               children: [
                                 TextForm(
-                                  width: 350.0,
-                                  heading: "First Name:",
+                                  containerwidth: 350.0,
+                                  text: "First Name:",
                                   hinttext: "Please enter your first name",
                                   maxLine: 1,
                                 ),
@@ -257,8 +331,8 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                                   height: 15.0,
                                 ),
                                 TextForm(
-                                    heading: "Email",
-                                    width: 350.0,
+                                    text: "Email",
+                                    containerwidth: 350.0,
                                     hinttext: "Please enter your email",
                                     maxLine: 1)
                               ],
@@ -267,25 +341,24 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 TextForm(
-                                  width: 350.0,
-                                  heading: "Last Name:",
+                                  containerwidth: 350.0,
+                                  text: "Last Name:",
                                   hinttext: "Please enter your last name:",
-                                  maxLine: 1,
                                 ),
                                 SizedBox(
                                   height: 15.0,
                                 ),
                                 TextForm(
-                                    heading: "Number",
-                                    width: 350.0,
-                                    hinttext: "Please enter your number",
-                                    maxLine: 1)
+                                  text: "Number",
+                                  containerwidth: 350.0,
+                                  hinttext: "Please enter your number",
+                                )
                               ],
                             )
                           ]),
                       TextForm(
-                          heading: "Message",
-                          width: widthDevice / 1.5,
+                          text: "Message",
+                          containerwidth: widthDevice / 1.5,
                           hinttext: "Please enter your message here",
                           maxLine: 10.0),
                       MaterialButton(
@@ -294,7 +367,7 @@ class _LandingPageWebState extends State<LandingPageWeb> {
                               borderRadius: BorderRadius.circular(10.0)),
                           height: 60.0,
                           minWidth: 200.0,
-                          color: Colors.tealAccent,
+                          color: Color.fromARGB(255, 4, 77, 78),
                           child: SansBold("Submit", 20.0),
                           onPressed: () {})
                     ])),
